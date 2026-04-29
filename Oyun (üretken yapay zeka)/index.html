@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>OSI Katman Eğitmeni</title>
+
+<style>
+:root {
+  --primary: #3498db;
+  --success: #2ecc71;
+  --error: #e74c3c;
+  --dark: #2c3e50;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: var(--dark);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  width: 900px;
+}
+
+/* Sol taraf */
+.stack {
+  flex: 1;
+  background: #34495e;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 400px;
+}
+
+.layer-slot {
+  border: 2px dashed #7f8c8d;
+  height: 50px;
+  margin: 10px 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.filled {
+  background: var(--success);
+  border-style: solid;
+}
+
+/* Sağ taraf */
+.toolbox {
+  flex: 1;
+  background: #1a252f;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.header-card {
+  background: var(--primary);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: grab;
+  display: inline-block;
+}
+
+#info-panel {
+  width: 900px;
+  background: #16a085;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.score-board {
+  font-size: 1.5rem;
+  margin: 20px;
+  color: #f1c40f;
+}
+</style>
+</head>
+
+<body>
+
+<h1>OSI Veri Kapsülleme Simülatörü</h1>
+
+<div id="info-panel">
+  <strong>Görev:</strong> Bir web sitesine bağlanmak için paketi hazırla!<br>
+  <span id="instruction">
+    Veriyi iletmek için en alt katmandan (L1) başlayarak uygun protokolü yerleştir.
+  </span>
+</div>
+
+<div class="score-board">
+  Puan: <span id="score">0</span> |
+  Seviye: <span id="level">L1 - Fiziksel</span>
+</div>
+
+<div id="game-container">
+
+  <div class="stack" id="osi-stack">
+    <div class="layer-slot" data-layer="7">L7 - Uygulama (Application)</div>
+    <div class="layer-slot" data-layer="4">L4 - Taşıma (Transport)</div>
+    <div class="layer-slot" data-layer="3">L3 - Ağ (Network)</div>
+    <div class="layer-slot" data-layer="2">L2 - Veri Bağı (Data Link)</div>
+    <div class="layer-slot" data-layer="1">L1 - Fiziksel (Physical)</div>
+  </div>
+
+  <div class="toolbox">
+    <h3>Uygun Başlığı Seç ve Yerleştir</h3>
+
+    <div class="header-card" draggable="true" ondragstart="drag(event)" id="h-bits">
+      Bitler / Kablolar
+    </div>
+
+    <div class="header-card" draggable="true" ondragstart="drag(event)" id="h-mac">
+      MAC Adresi (Frame)
+    </div>
+
+    <div class="header-card" draggable="true" ondragstart="drag(event)" id="h-ip">
+      IP Adresi (Packet)
+    </div>
+
+    <div class="header-card" draggable="true" ondragstart="drag(event)" id="h-tcp">
+      TCP / UDP (Segment)
+    </div>
+
+    <div class="header-card" draggable="true" ondragstart="drag(event)" id="h-http">
+      HTTP / DNS (Data)
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+let score = 0;
+let currentStep = 1;
+
+const correctMapping = {
+  1: "h-bits",
+  2: "h-mac",
+  3: "h-ip",
+  4: "h-tcp",
+  7: "h-http"
+};
+
+const descriptions = {
+  1: "L1 tamam! Sinyaller elektrik/ışık olarak hazır.",
+  2: "L2 tamam! Yerel ağdaki MAC adresleri eklendi.",
+  3: "L3 tamam! Internet rotası için IP başlığı eklendi.",
+  4: "L4 tamam! Portlar (80, 443) ve hata kontrol sağlandı.",
+  7: "L7 tamam! Kullanıcı verisi (HTTP) paketlendi. Veri gönderiliyor!"
+};
+
+// sürükle
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+// bırakma
+document.querySelectorAll('.layer-slot').forEach(slot => {
+
+  slot.ondragover = (e) => e.preventDefault();
+
+  slot.ondrop = function(ev) {
+    ev.preventDefault();
+
+    const data = ev.dataTransfer.getData("text");
+    const layerNum = parseInt(this.getAttribute("data-layer"));
+
+    if (layerNum === currentStep && correctMapping[layerNum] === data) {
+
+      this.classList.add("filled");
+      this.innerText = document.getElementById(data).innerText + " ✔";
+
+      score += 20;
+      document.getElementById("score").innerText = score;
+
+      document.getElementById("instruction").innerText =
+        descriptions[currentStep];
+
+      if (currentStep === 4) {
+        currentStep = 7;
+      } else if (currentStep === 7) {
+        alert("TEBRİKLER! Veri paketini başarıyla kapsüllediniz ve ağa gönderdiniz.");
+        resetGame();
+      } else {
+        currentStep++;
+      }
+
+      document.getElementById("level").innerText = "L" + currentStep;
+
+    } else {
+      alert("Yanlış Katman! OSI modeline göre sıralama hatalı.");
+      score = Math.max(0, score - 10);
+      document.getElementById("score").innerText = score;
+    }
+  };
+});
+
+function resetGame() {
+  location.reload();
+}
+
+</script>
+
+</body>
+</html>
