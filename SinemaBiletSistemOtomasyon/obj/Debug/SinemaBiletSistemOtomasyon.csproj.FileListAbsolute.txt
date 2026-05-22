@@ -1,0 +1,12 @@
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\bin\Debug\SinemaBiletSistemOtomasyon.exe.config
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\bin\Debug\SinemaBiletSistemOtomasyon.exe
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\bin\Debug\SinemaBiletSistemOtomasyon.pdb
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.csproj.AssemblyReference.cache
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.frmAnaEkran.resources
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.frmBiletSatis.resources
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.frmGiris.resources
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.Properties.Resources.resources
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.csproj.GenerateResource.cache
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.csproj.CoreCompileInputs.cache
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.exe
+C:\Users\a\source\repos\SinemaBiletSistemOtomasyon\SinemaBiletSistemOtomasyon\obj\Debug\SinemaBiletSistemOtomasyon.pdb
